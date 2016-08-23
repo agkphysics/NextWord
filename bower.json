@@ -1,0 +1,23 @@
+{
+  "name": "nextword",
+  "description": "A game in which you have to guess the most likely next word.",
+  "main": "app.js",
+  "authors": [
+    "Aaron Keesing"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+      "jquery": "latest",
+      "bootstrap": "latest",
+      "angular": "latest"
+  }
+}
