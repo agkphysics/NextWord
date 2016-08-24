@@ -29,12 +29,11 @@ module.exports = function(grunt) {
 
     ts: {
       options: {
-        module: "commonjs"
+        module: "system"
       },
       default : {
         src: ["src/*.ts", "!node_modules/**"],
-        dest: "public/js/main.js",
-        watch: "src"
+        dest: "public/js/main.js"
       }
     },
 
@@ -44,7 +43,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          "public/js/main.js.min": ["<%= ts.default.dest %>"]
+          "public/js/main.min.js": ["<%= ts.default.dest %>"]
         }
       }
     }
