@@ -5,17 +5,16 @@
   "main": "app.js",
   "homepage": "nextword.azurewebsites.net",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start --server --files \"**/*\"",
-    "install": "bower install && grunt"
+    "install": "bower install && grunt",
+    "prepublish": "typings install && grunt"
   },
   "author": "Aaron Keesing",
   "license": "ISC",
   "devDependencies": {
-      "browser-sync": "^2.14.0",
-      "bower": "^1.7.9",
-      "grunt-cli": "^1.2.0",
-      "typings": "^1.3.2"
+    "browser-sync": "^2.14.0",
+    "bower": "^1.7.9",
+    "grunt-cli": "^1.2.0",
+    "typings": "^1.3.2"
   },
   "dependencies": {
     "grunt": "^1.0.1",
@@ -26,6 +25,6 @@
   },
   "private": true,
   "repository": {
-      "url": "https://github.com/agkphysics/NextWord.git"
+    "url": "https://github.com/agkphysics/NextWord.git"
   }
 }

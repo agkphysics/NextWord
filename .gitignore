@@ -4,3 +4,4 @@ typings/
 public/
 .vscode/
 .tscache/
+*.log*

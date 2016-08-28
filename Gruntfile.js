@@ -2,20 +2,21 @@ module.exports = function(grunt) {
   "use strict";
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON("package.json"),
 
     copy: {
       jquery: {
         expand: true,
-        src: 'bower_components/jquery/dist/*.min.js',
-        dest: 'public/js/',
+        src: "bower_components/jquery/dist/*.min.js",
+        dest: "public/js/",
         flatten: true,
-        filter: 'isFile'
+        filter: "isFile"
       },
       bootstrap: {
         files: [
-          { expand: true, src: 'bower_components/bootstrap/dist/js/*.min.js', dest: 'public/js/', flatten: true, filter: 'isFile' },
-          { expand: true, src: 'bower_components/bootstrap/dist/css/*.min.css', dest: 'public/css/', flatten: true, filter: 'isFile' }
+          { expand: true, src: "bower_components/bootstrap/dist/js/*.min.js", dest: "public/js/", flatten: true, filter: "isFile" },
+          { expand: true, src: "bower_components/bootstrap/dist/css/*.min.css", dest: "public/css/", flatten: true, filter: "isFile" },
+          { expand: true, src: "bower_components/bootstrap/dist/fonts/*.*", dest: "public/fonts/", flatten: true, filter: "isFile" }
         ]
       },
       angular: {
@@ -23,15 +24,23 @@ module.exports = function(grunt) {
         src: "bower_components/angular/*.min.js",
         dest: "public/js/",
         flatten: true,
-        filter: 'isFile'
+        filter: "isFile"
+      },
+      css: {
+        expand: true,
+        src: "src/*.css",
+        dest: "public/css/",
+        flatten: true,
+        filter: "isFile"
       }
     },
 
     ts: {
       options: {
-        module: "system"
+        module: "system",
+        sourceMap: false
       },
-      default : {
+      default: {
         src: ["src/*.ts", "!node_modules/**"],
         dest: "public/js/main.js"
       }
@@ -39,7 +48,7 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: "/*! <%= pkg.name %> <%= grunt.template.today(\"dd-mm-yyyy\") %> */\n"
       },
       dist: {
         files: {
@@ -49,9 +58,9 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-ts');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks("grunt-ts");
+  grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-contrib-uglify");
 
-  grunt.registerTask('default', ['copy', 'ts', 'uglify']);
+  grunt.registerTask("default", ["copy", "ts", "uglify"]);
 };
