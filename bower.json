@@ -17,7 +17,6 @@
   ],
   "dependencies": {
       "jquery": "latest",
-      "bootstrap": "latest",
-      "angular": "latest"
+      "bootstrap": "latest"
   }
 }

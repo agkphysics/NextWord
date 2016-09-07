@@ -3,6 +3,13 @@
     "module": "commonjs",
     "target": "es5",
     "allowJs": true,
-    "sourceMap": false
-  }
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+    "noLib": false
+  },
+  "exclude": [
+    "public",
+    "node_modules",
+    "bower_components"
+  ]
 }

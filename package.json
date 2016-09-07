@@ -5,8 +5,8 @@
   "main": "app.js",
   "homepage": "nextword.azurewebsites.net",
   "scripts": {
-    "install": "bower install && grunt",
-    "prepublish": "typings install && grunt"
+    "install": "bower install && typings install && grunt",
+    "prepublish": "grunt"
   },
   "author": "Aaron Keesing",
   "license": "ISC",
@@ -14,14 +14,15 @@
     "browser-sync": "^2.14.0",
     "bower": "^1.7.9",
     "grunt-cli": "^1.2.0",
-    "typings": "^1.3.2"
+    "grunt-browser-sync": "^2.2.0"
   },
   "dependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-ts": "^5.5.1",
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2"
   },
   "private": true,
   "repository": {

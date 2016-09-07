@@ -2,6 +2,7 @@
   "name": "nextword",
   "dependencies": {},
   "globalDependencies": {
+    "fbsdk": "registry:dt/fbsdk#0.0.0+20160809204505",
     "gruntjs": "registry:dt/gruntjs#0.4.0+20160602153508",
     "jquery": "registry:dt/jquery#1.10.0+20160704162008",
     "node": "registry:dt/node#6.0.0+20160818175514"

@@ -13,164 +13,109 @@
   <script type="text/javascript" src="public/js/bootstrap.min.js"></script>
 
   <link href="public/css/style.css" rel="stylesheet">
-  <script type="text/javascript" src="public/js/main.min.js"></script>
+
+  <script type="text/javascript">var appInsights = window.appInsights || function(config) { function r(config) { t[config] = function() { var i = arguments;
+    t.queue.push(function() { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script",
+    s = u.createElement(o), i, f; s.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(s);
+    try { t.cookie = u.cookie } catch (h) {} for (t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"];
+    i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking
+    || (i = "onerror", r("_" + i), f = e[i], e[i] = function(config, r, u, e, o) { var s = f && f(config, r, u, e, o); return
+    s !== !0 && t["_" + i](config, r, u, e, o), s }), t }({ instrumentationKey: "100eb9f8-b703-4afa-8767-491d68c52684" }); window.appInsights
+    = appInsights; appInsights.trackPageView();</script>
 
   <script type="text/javascript">
-    var appInsights = window.appInsights || function(config) {
-      function r(config) {
-        t[config] = function() {
-          var i = arguments;
-          t.queue.push(function() {
-            t[config].apply(t, i)
-          })
-        }
-      }
-      var t = {
-          config: config
-        },
-        u = document,
-        e = window,
-        o = "script",
-        s = u.createElement(o),
-        i, f;
-      s.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
-      u.getElementsByTagName(o)[0].parentNode.appendChild(s);
-      try {
-        t.cookie = u.cookie
-      } catch (h) {}
-      for (t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; i.length;) r("track" + i.pop());
-      return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function(config, r, u, e, o) {
-        var s = f && f(config, r, u, e, o);
-        return s !== !0 && t["_" + i](config, r, u, e, o), s
-      }), t
-    }({
-      instrumentationKey: "100eb9f8-b703-4afa-8767-491d68c52684"
+    $(function () {
+      $.ajaxSetup({ cache: true });
+      $.getScript('//connect.facebook.net/en_US/sdk.js', initFBStuff);
     });
-    window.appInsights = appInsights;
-    appInsights.trackPageView();
-
   </script>
 </head>
 
 <body>
-
   <script>
-    // This is called with the results from from FB.getLoginStatus().
-    function statusChangeCallback(response) {
-      console.log('statusChangeCallback');
-      console.log(response);
-      // The response object is returned with a status field that lets the
-      // app know the current login status of the person.
-      // Full docs on the response object can be found in the documentation
-      // for FB.getLoginStatus().
-      if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        testAPI();
-      } else if (response.status === 'not_authorized') {
-        // The person is logged into Facebook, but not your app.
-        document.getElementById('status').innerHTML = 'Please log ' +
-          'into this app.';
-      } else {
-        // The person is not logged into Facebook, so we're not sure if
-        // they are logged into this app or not.
-        document.getElementById('status').innerHTML = 'Please log ' +
-          'into Facebook.';
-      }
-    }
-
-    // This function is called when someone finishes with the Login
-    // Button.  See the onlogin handler attached to it in the sample
-    // code below.
-    function checkLoginState() {
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-      });
-    }
-
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: '1748453752089823',
-        cookie: true, // enable cookies to allow the server to access
-        // the session
-        xfbml: true, // parse social plugins on this page
-        version: 'v2.7' // use graph api version 2.7
-      });
-
-      // Now that we've initialized the JavaScript SDK, we call
-      // FB.getLoginStatus().  This function gets the state of the
-      // person visiting this page and can return one of three states to
-      // the callback you provide.  They can be:
-      //
-      // 1. Logged into your app ('connected')
-      // 2. Logged into Facebook, but not your app ('not_authorized')
-      // 3. Not logged into Facebook and can't tell if they are logged into
-      //    your app or not.
-      //
-      // These three cases are handled in the callback function.
-
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-      });
-
-    };
-
-    // Load the SDK asynchronously
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    // Here we run a very simple test of the Graph API after login is
-    // successful.  See statusChangeCallback() for when this call is made.
-    function testAPI() {
-      console.log('Welcome!  Fetching your information.... ');
-      FB.api('/me', function(response) {
-        console.log('Successful login for: ' + response.name);
-        document.getElementById('status').innerHTML =
-          'Thanks for logging in, ' + response.name + '!';
-      });
-    }
 
   </script>
 
   <div class="container">
 
-    <div class="page-header center-block">
-      <h1>NextWord <small>The predictive text game</small></h1>
+    <div class="page-header">
+      <h1 class="text-center"><span style="text-decoration: underline">N</span>extWord <small>The predictive text game</small></h1>
     </div>
 
-    <div>
-      <div class="form-group col-sm-6 has-feedback">
-        <input type="text" placeholder="Enter some words" class="form-control input-lg">
-      </div>
-      <div class="form-group col-sm-3">
-        <input type="text" placeholder="Enter a word" class="form-control input-lg">
-      </div>
-      <input type="button" class="btn btn-primary btn-lg" value="Submit" id="wordSubmitButton">
+    <button type="button" data-toggle="modal" data-target="#helpModal" class="btn btn-info">Help</button>
+    <div class="modal fade" id="helpModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Help/About</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Help</h4>
+            <p>
+              NextWord is a game in which you have to guess what word is most likey to come next in the phrase given.
+              <br>
+              Your score for each word input will be a log-probability, that is, the logarithm of the probability that your word comes next.
+              This is a negative number; the lower the probability, the more negative the number.
+              <br>
+              Your score is the logsum of all log-probabilities you have gotten so far, so the greater the number (less negative), the better your score.
+            </p>
+            <br>
 
+            <h4>About</h4>
+            <p>
+              This web app uses the <a target="_blank" href="https://www.microsoft.com/cognitive-services/en-us/web-language-model-api">Microsoft WebLM API</a>
+              and is hosted on the <a target="_blank" href="https://azure.microsoft.com/">Azure</a> platform.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="form-group col-sm-6">
+        <div class="input-group input-group-lg">
+          <div class="input-group-addon" id="staticWords">Where is the</div>
+          <input type="text" placeholder="Enter a word" class="form-control input-lg" id="wordInput">
+        </div>
+      </div>
+      <div class="form-group col-sm-2">
+        <input type="button" class="btn btn-primary btn-lg center-block" value="Submit" id="wordSubmitButton">
+      </div>
+      <div class="col-sm-2"></div>
     </div>
 
     <br>
 
-    <div class="panel panel-info">
+    <div class="panel panel-info hide">
       <div class="panel-heading">
         <h3 class="panel-title">Results</h3>
       </div>
-      <div class="panel-body" id="probResults"></div>
+      <div class="panel-body" id="error"></div>
     </div>
 
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-    </fb:login-button>
 
-    <div id="status">
+
+    <div class="row">
+      <div class="text-center col-sm-12 center-block" id="score">
+        Current score: 0
+      </div>
     </div>
 
+
+    <div id="fbLoginButton" class="center-block btn btn-block hide"><img src="FB-f-Logo__white_50.png"> Log in using Facebook</div>
+
+    <footer class="foot">
+      <span title="Copyright" class="glyphicon glyphicon-copyright-mark"></span> Aaron Keesing 2016.
+    </footer>
   </div>
 
+  <script type="text/javascript" src="public/js/main.min.js"></script>
 </body>
 
 </html>

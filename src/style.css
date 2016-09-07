@@ -1,1 +1,45 @@
+.title {
+  text-align: center;
+}
 
+#fbLoginButton {
+  width: 14em;
+  text-align: center;
+  background-color: #4267B2;
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+
+  margin: 1em auto;
+
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#staticWords {
+  background-color: transparent;
+  border-right: 0;
+  padding-right: 0;
+
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,.075);
+  box-shadow: inset 0 2px 1px -1px rgba(0,0,0,.075);
+}
+
+#wordInput {
+  border-left: 0;
+  padding-left: 0.5em;
+  -webkit-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,.075);
+  box-shadow: inset 0 2px 1px -1px rgba(0,0,0,.075);
+}
+
+#score {
+  font-size: 5em;
+}
+
+footer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  width: 75%;
+  text-align: center;
+}

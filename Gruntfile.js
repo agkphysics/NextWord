@@ -38,7 +38,9 @@ module.exports = function(grunt) {
     ts: {
       options: {
         module: "system",
-        sourceMap: false
+        sourceMap: false,
+        target: "es5"
+
       },
       default: {
         src: ["src/*.ts", "!node_modules/**"],
@@ -55,6 +57,20 @@ module.exports = function(grunt) {
           "public/js/main.min.js": ["<%= ts.default.dest %>"]
         }
       }
+    },
+
+    browserSync: {
+      bsFiles: {
+        src: [
+          'public/*/*.*',
+          "index.html"
+        ]
+      },
+      options: {
+        server: {
+          baseDir: "./"
+        }
+      }
     }
   });
 
@@ -62,5 +78,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-uglify");
 
+  grunt.loadNpmTasks("grunt-browser-sync");
+
   grunt.registerTask("default", ["copy", "ts", "uglify"]);
+  grunt.registerTask("build", ["copy:css", "ts", "uglify"]);
+  grunt.registerTask("bsync", ["browserSync"]);
 };
