@@ -19,13 +19,6 @@ module.exports = function(grunt) {
           { expand: true, src: "bower_components/bootstrap/dist/fonts/*.*", dest: "public/fonts/", flatten: true, filter: "isFile" }
         ]
       },
-      angular: {
-        expand: true,
-        src: "bower_components/angular/*.min.js",
-        dest: "public/js/",
-        flatten: true,
-        filter: "isFile"
-      },
       css: {
         expand: true,
         src: "src/*.css",
