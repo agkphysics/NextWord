@@ -32,17 +32,15 @@
 </head>
 
 <body>
-  <script>
-
-  </script>
-
   <div class="container">
 
     <div class="page-header">
       <h1 class="text-center"><span style="text-decoration: underline">N</span>extWord <small>The predictive text game</small></h1>
     </div>
 
-    <button type="button" data-toggle="modal" data-target="#helpModal" class="btn btn-info">Help</button>
+    <button type="button" data-toggle="modal" data-target="#helpModal" class="btn btn-default">Help</button>
+
+    <!-- Help/About dialog -->
     <div class="modal fade" id="helpModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -76,6 +74,7 @@
     </div>
 
 
+    <!-- Main input row -->
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="form-group col-sm-6">
@@ -92,18 +91,34 @@
 
     <br>
 
-    <div class="panel panel-info hide">
-      <div class="panel-heading">
-        <h3 class="panel-title">Results</h3>
+    <div class="alert fade in hide" id="error"></div>
+
+
+
+    <div class="modal fade" id="shareModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Congratulations!</h4>
+          </div>
+          <div class="modal-body">
+            Congratulations <span id="name"></span>, you've got a score of <span id="finalScore"></span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="fbShareButton"><img style="width: 1em;" src="FB-f-Logo__white_50.png"> Share to Facebook</button>
+            <button type="button" class="btn btn-primary" id="resetButton">Reset</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
-      <div class="panel-body" id="error"></div>
     </div>
 
 
 
     <div class="row">
-      <div class="text-center col-sm-12 center-block" id="score">
-        Current score: 0
+      <div class="text-center col-sm-12 center-block score">
+        Your score: <span id="score">0</span>
       </div>
     </div>
 

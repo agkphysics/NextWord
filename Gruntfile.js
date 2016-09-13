@@ -39,8 +39,8 @@ module.exports = function(grunt) {
       options: {
         module: "system",
         sourceMap: false,
-        target: "es5"
-
+        target: "es5",
+        failOnTypeErrors: false
       },
       default: {
         src: ["src/*.ts", "!node_modules/**"],
