@@ -2,13 +2,21 @@
 /// <reference path="../typings/globals/fbsdk/index.d.ts" />
 /// <reference path="../typings/globals/bootstrap/index.d.ts" />
 
+
+/**
+ * main.ts - The main source file for the client-side script that runs NextWord
+ *
+ * @author: Aaron Keesing
+ */
+
+
 // These are the URLs for the API
 const GEN_WORDS_URL: string = "https://api.projectoxford.ai/text/weblm/v1.0/generateNextWords?model=body&maxNumOfCandidatesReturned=10";
 const WORD_PROB_URL: string = "https://api.projectoxford.ai/text/weblm/v1.0/calculateConditionalProbability?model=body";
 
 /**
- * These interfaces provide the type defitinition for the request and
- * response from the WebLM API.
+ * These interfaces provide the type defitinition for the requests and
+ * responses from the WebLM API.
  */
 interface LogProbRequest {
   queries: {
@@ -60,23 +68,21 @@ let score: number = 0.0;
 let unusedPhrases: string[] = PHRASES;
 
 
-enum Errors {ERROR, INFO};
+enum Errors { ERROR, INFO };
 function error(text: string, type: Errors = Errors.ERROR) {
   errorPanel.slideDown(500, null);
-  if (type == Errors.ERROR) {
+  if (type === Errors.ERROR) {
     errorPanel.removeClass("alert-info");
     errorPanel.addClass("alert-danger");
   } else {
     errorPanel.removeClass("alert-danger");
     errorPanel.addClass("alert-info");
   }
-  errorPanel.html("<a href=\"#\" class=\"close\" data-hide=\"alert\" aria-label=\"close\" onclick=\"errorPanel.fadeOut(500, null);\">&times;</a>" + text);
+  errorPanel.html("<a href=\"#\" class=\"close\" data-hide=\"alert\" aria-label=\"close\" onclick=\"errorPanel.slideUp(500, null);\">&times;</a>" + text);
 }
 
-
-
 function chooseNextPhrase() {
-  if (unusedPhrases.length == 0) {
+  if (unusedPhrases.length === 0) {
     // Show the end dialog if we've run out of words
     $("#finalScore").html(score.toFixed(2));
     $("#shareModal").modal("show");
@@ -87,12 +93,12 @@ function chooseNextPhrase() {
 }
 
 
-
 function submitWords(): void {
   let words: string = staticWords.html();
   let word: string = wordInput.val();
+  word = word.trim().split(" ")[0].toLowerCase().replace(/[\W]/g, ""); // Get only first word of potentially multiple words, and in lower case
 
-  if (word.length == 0) {
+  if (word.length === 0) {
     error("Please enter a word.");
     return;
   }
@@ -136,17 +142,23 @@ function submitWords(): void {
     });
 }
 
+function reset() {
+  score = 0.0;
+  scoreDisplay.html("0");
+  unusedPhrases = PHRASES;
+  $("#shareModal").modal("hide");
+}
+
 
 // These functions do some Facebook stuff
 function initFBStuff() {
   FB.init({
-    appId: '1748453752089823',
+    appId: "1748453752089823",
     cookie: true,
-    version: 'v2.7'
+    version: "v2.7"
   });
 
   FB.getLoginStatus(statusChangeCallback);
-  $('#fbLoginButton').removeClass('hide');
 
   fbLoginButton.on("click", function () {
     if (!loggedIn) {
@@ -155,22 +167,19 @@ function initFBStuff() {
           fbLoginButton.html("<img src=\"FB-f-Logo__white_50.png\"> Log out");
           loggedIn = true;
         }
-      }, {scope: "email,public_profile,publish_actions"});
-    }
-    else {
+      }, { scope: "email,public_profile" });
+    } else {
       FB.logout(function () {
         fbLoginButton.html("<img src=\"FB-f-Logo__white_50.png\"> Log in using Facebook");
         loggedIn = false;
       });
     }
   });
-
-
 }
 
 function statusChangeCallback(response) {
-  if (response.status === 'connected') {
-    FB.api('/me', "get",
+  if (response.status === "connected") {
+    FB.api("/me", "get",
       {
         fields: "first_name,last_name"
       },
@@ -181,6 +190,7 @@ function statusChangeCallback(response) {
     fbLoginButton.html("<img src=\"FB-f-Logo__white_50.png\"> Log out");
     loggedIn = true;
   }
+  fbLoginButton.removeClass("hide");
 }
 
 
@@ -194,14 +204,11 @@ $(document).ready(function () {
 
   $("#fbShareButton").on("click", function () {
     FB.ui({
-      method: 'feed',
-      link: 'https://nextword.azurewebsites.net/',
-      name: 'My score was ' + score.toFixed(2) + '! - NextWord',
-      description: 'Nextword: The Predictive Text Game'
-    }, function (response: any) {});
+      method: "share",
+      href: "https://nextword.azurewebsites.net/",
+      quote: "My score was " + score.toFixed(2) + "! - NextWord"
+    }, null);
   });
+
+  $("#resetButton").on("click", reset);
 });
-
-
-
-

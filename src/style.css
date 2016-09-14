@@ -2,12 +2,32 @@
   text-align: center;
 }
 
+div.score {
+  font-size: 3em;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 25px;
+}
+
+footer.foot {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Facebook buttons */
 #fbLoginButton {
   width: 14em;
   text-align: center;
-  background-color: #4267B2;
   color: white;
-  font-size: x-large;
+  font-size: large;
   font-weight: bold;
 
   margin: 1em auto;
@@ -16,10 +36,15 @@
   padding-right: 0;
 }
 
-#fbShareButton {
+#fbLoginButton > img{
+  width: 40px;
+}
+
+#fbShareButton, #fbLoginButton {
   background-color: #4267B2;
 }
 
+/* Phrases and word input */
 #staticWords {
   background-color: transparent;
   border-right: 0;
@@ -36,14 +61,3 @@
   box-shadow: inset 0 2px 1px -1px rgba(0,0,0,.075);
 }
 
-div.score {
-  font-size: 3em;
-}
-
-footer {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2em;
-  width: 75%;
-  text-align: center;
-}

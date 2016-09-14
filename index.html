@@ -6,6 +6,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Open Graph Facebook stuff -->
+  <meta property="og:url" content="https://nextword.azurewebsites.net/">
+  <meta property="og:type" content="website">
+  <meta property="fb:app_id" content="1748453752089823">
+  <meta name="title" property="og:title" content="NextWord">
+  <meta name="description" property="og:description" content="NextWord is a game based on the idea of predictive texting.">
+
   <link rel="shortcut icon" href="favicon.ico">
 
   <script type="text/javascript" src="public/js/jquery.min.js"></script>
@@ -35,7 +42,9 @@
   <div class="container">
 
     <div class="page-header">
-      <h1 class="text-center"><span style="text-decoration: underline">N</span>extWord <small>The predictive text game</small></h1>
+      <h1 class="text-center"><span style="text-decoration: underline">N</span>extWord
+      <br>
+      <small>The predictive text game</small></h1>
     </div>
 
     <button type="button" data-toggle="modal" data-target="#helpModal" class="btn btn-default">Help</button>
@@ -93,8 +102,6 @@
 
     <div class="alert fade in hide" id="error"></div>
 
-
-
     <div class="modal fade" id="shareModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -103,7 +110,7 @@
             <h4 class="modal-title">Congratulations!</h4>
           </div>
           <div class="modal-body">
-            Congratulations <span id="name"></span>, you've got a score of <span id="finalScore"></span>
+            Congratulations <span id="name"></span>, you got a score of <span id="finalScore"></span>!
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="fbShareButton"><img style="width: 1em;" src="FB-f-Logo__white_50.png"> Share to Facebook</button>
@@ -114,21 +121,21 @@
       </div>
     </div>
 
-
-
     <div class="row">
       <div class="text-center col-sm-12 center-block score">
         Your score: <span id="score">0</span>
       </div>
     </div>
 
+    <div id="fbLoginButton" class="center-block btn btn-block hide"><img src="FB-f-Logo__white_50.png" style="width: 40px;"> Log in using Facebook</div>
 
-    <div id="fbLoginButton" class="center-block btn btn-block hide"><img src="FB-f-Logo__white_50.png"> Log in using Facebook</div>
-
-    <footer class="foot">
-      <span title="Copyright" class="glyphicon glyphicon-copyright-mark"></span> Aaron Keesing 2016.
-    </footer>
   </div>
+
+  <footer class="foot">
+    <div class="container">
+      <span title="Copyright" class="glyphicon glyphicon-copyright-mark"></span> Aaron Keesing 2016.
+    </div>
+  </footer>
 
   <script type="text/javascript" src="public/js/main.min.js"></script>
 </body>
