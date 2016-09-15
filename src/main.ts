@@ -42,6 +42,8 @@ interface GenWordsResponse {
 
 
 // A small set of phrases to choose from
+const NUMBER_ROUNDS: number = 10;
+
 const PHRASES = [
   "Hello my",
   "What happened after",
@@ -51,7 +53,21 @@ const PHRASES = [
   "Look over",
   "When is your",
   "Tell me how to",
-  "You weren't at the"
+  "You weren't at the",
+  "Microsoft is the",
+  "Let's go to the",
+  "Look at that",
+  "Why are you",
+  "How many",
+  "Good luck for",
+  "I wish that I",
+  "My biggest mistake was",
+  "You'll never believe",
+  "I have always",
+  "There's no point in",
+  "You'd better not",
+  "I can't",
+  "Let epsilon be greater than"
 ];
 
 
@@ -65,7 +81,7 @@ let staticWords: JQuery = $("#staticWords");
 let loggedIn: boolean = false;
 
 let score: number = 0.0;
-let unusedPhrases: string[] = PHRASES;
+let unusedPhrases: string[] = PHRASES.slice();
 
 
 enum Errors { ERROR, INFO };
@@ -80,6 +96,7 @@ function error(text: string, type: Errors = Errors.ERROR) {
   }
   errorPanel.html("<a href=\"#\" class=\"close\" data-hide=\"alert\" aria-label=\"close\" onclick=\"errorPanel.slideUp(500, null);\">&times;</a>" + text);
 }
+
 
 function chooseNextPhrase() {
   if (unusedPhrases.length === 0) {
@@ -97,6 +114,7 @@ function submitWords(): void {
   let words: string = staticWords.html();
   let word: string = wordInput.val();
   word = word.trim().split(" ")[0].toLowerCase().replace(/[\W]/g, ""); // Get only first word of potentially multiple words, and in lower case
+  words = words.trim().replace(/[^\w\s]/g, ""); // Remove punctuation from the phrase
 
   if (word.length === 0) {
     error("Please enter a word.");
@@ -128,11 +146,18 @@ function submitWords(): void {
           xhr.setRequestHeader("Content-Type", "application/json");
           xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "29db69448b1f423e92dcfa0bddea9195");
         },
-        url: GEN_WORDS_URL + "&words=" + encodeURIComponent(staticWords.html()),
+        url: GEN_WORDS_URL + "&words=" + encodeURIComponent(words),
         data: {}
       })
         .done(function (results: GenWordsResponse) {
-          error("The most probable word that round was: <strong>" + results.candidates[0].word + "</strong>", Errors.INFO);
+          try {
+            error("The most probable word that round was: <strong>" + results.candidates[0].word + "</strong>", Errors.INFO);
+          } catch (e) {
+            error("Looks like that was an uncommon phrase!", Errors.INFO);
+          }
+        })
+        .fail(function () {
+          errorPanel.slideUp(500, null);
         });
 
       chooseNextPhrase();
@@ -142,11 +167,19 @@ function submitWords(): void {
     });
 }
 
+// This function restarts the game
 function reset() {
   score = 0.0;
   scoreDisplay.html("0");
-  unusedPhrases = PHRASES;
+  unusedPhrases = PHRASES.slice();
+  for (let i: number = 0; i < PHRASES.length - NUMBER_ROUNDS - 1; i++) {
+    let r: number = Math.floor(Math.random() * unusedPhrases.length);
+    unusedPhrases.splice(r, 1)[0]; // Remove all except NUMBER_ROUNDS phrases
+  }
   $("#shareModal").modal("hide");
+  errorPanel.slideUp(500, null);
+
+  chooseNextPhrase();
 }
 
 
@@ -199,7 +232,7 @@ $(document).ready(function () {
   errorPanel.hide();
   errorPanel.removeClass("hide");
 
-  chooseNextPhrase();
+  reset();
   submitButton.on("click", submitWords);
 
   $("#fbShareButton").on("click", function () {
@@ -210,5 +243,5 @@ $(document).ready(function () {
     }, null);
   });
 
-  $("#resetButton").on("click", reset);
+  $(".reset").on("click", reset);
 });

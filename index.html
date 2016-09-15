@@ -47,7 +47,12 @@
       <small>The predictive text game</small></h1>
     </div>
 
-    <button type="button" data-toggle="modal" data-target="#helpModal" class="btn btn-default">Help</button>
+    <div class="row">
+      <div class="form-group col-sm-12">
+        <button type="button" data-toggle="modal" data-target="#helpModal" class="btn btn-default">Help</button>
+        <button type="button" class="btn btn-default reset">Restart</button>
+      </div>
+    </div>
 
     <!-- Help/About dialog -->
     <div class="modal fade" id="helpModal">
@@ -61,10 +66,10 @@
             <h4>Help</h4>
             <p>
               NextWord is a game in which you have to guess what word is most likey to come next in the phrase given.
-              <br>
+              <br><br>
               Your score for each word input will be a log-probability, that is, the logarithm of the probability that your word comes next.
               This is a negative number; the lower the probability, the more negative the number.
-              <br>
+              <br><br>
               Your score is the logsum of all log-probabilities you have gotten so far, so the greater the number (less negative), the better your score.
             </p>
             <br>
@@ -114,7 +119,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="fbShareButton"><img style="width: 1em;" src="FB-f-Logo__white_50.png"> Share to Facebook</button>
-            <button type="button" class="btn btn-primary" id="resetButton">Reset</button>
+            <button type="button" class="btn btn-default reset">Restart</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
