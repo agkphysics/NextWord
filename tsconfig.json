@@ -5,7 +5,8 @@
     "allowJs": true,
     "sourceMap": false,
     "allowSyntheticDefaultImports": true,
-    "noLib": false
+    "noLib": false,
+    "typeRoots": ["./typings"]
   },
   "exclude": [
     "public",

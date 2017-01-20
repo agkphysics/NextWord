@@ -1,14 +1,9 @@
-/// <reference path="../typings/globals/jquery/index.d.ts" />
-/// <reference path="../typings/globals/fbsdk/index.d.ts" />
-/// <reference path="../typings/globals/bootstrap/index.d.ts" />
-
-
 /**
  * main.ts - The main source file for the client-side script that runs NextWord
  *
  * @author: Aaron Keesing
+ * @version: 1.1
  */
-
 
 // These are the URLs for the API
 const GEN_WORDS_URL: string = "https://api.projectoxford.ai/text/weblm/v1.0/generateNextWords?model=body&maxNumOfCandidatesReturned=10";
@@ -19,27 +14,26 @@ const WORD_PROB_URL: string = "https://api.projectoxford.ai/text/weblm/v1.0/calc
  * responses from the WebLM API.
  */
 interface LogProbRequest {
-  queries: {
+  queries: Array<{
     words: string,
     word: string
-  }[];
+  }>;
 }
 
 interface LogProbResponse {
-  results: {
+  results: Array<{
     words: string,
     word: string,
     probability: number
-  }[];
+  }>;
 }
 
 interface GenWordsResponse {
-  candidates: {
+  candidates: Array<{
     word: string,
     probability: number
-  }[];
+  }>;
 }
-
 
 // A small set of phrases to choose from
 const NUMBER_ROUNDS: number = 10;
@@ -70,7 +64,6 @@ const PHRASES = [
   "Let epsilon be greater than"
 ];
 
-
 let submitButton: JQuery = $("#wordSubmitButton");
 let wordInput: JQuery = $("#wordInput");
 let fbLoginButton: JQuery = $("#fbLoginButton");
@@ -82,7 +75,6 @@ let loggedIn: boolean = false;
 
 let score: number = 0.0;
 let unusedPhrases: string[] = PHRASES.slice();
-
 
 enum Errors { ERROR, INFO };
 function error(text: string, type: Errors = Errors.ERROR) {
@@ -97,7 +89,6 @@ function error(text: string, type: Errors = Errors.ERROR) {
   errorPanel.html("<a href=\"#\" class=\"close\" data-hide=\"alert\" aria-label=\"close\" onclick=\"errorPanel.slideUp(500, null);\">&times;</a>" + text);
 }
 
-
 function chooseNextPhrase() {
   if (unusedPhrases.length === 0) {
     // Show the end dialog if we've run out of words
@@ -108,7 +99,6 @@ function chooseNextPhrase() {
   let nextPhrase: string = unusedPhrases.splice(r, 1)[0];
   staticWords.html(nextPhrase);
 }
-
 
 function submitWords(): void {
   let words: string = staticWords.html();
@@ -129,40 +119,40 @@ function submitWords(): void {
   };
 
   $.post({
-    beforeSend: function (xhr: JQueryXHR) {
+    beforeSend: (xhr) => {
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "29db69448b1f423e92dcfa0bddea9195");
     },
     url: WORD_PROB_URL,
     data: JSON.stringify(req)
   })
-    .done(function (results: LogProbResponse) {
+    .done((results: LogProbResponse) => {
       score += results.results[0].probability;
       scoreDisplay.html(score.toFixed(2));
 
       // Get best next word for info display
       $.post({
-        beforeSend: function (xhr: JQueryXHR) {
+        beforeSend: (xhr: JQueryXHR) => {
           xhr.setRequestHeader("Content-Type", "application/json");
           xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "29db69448b1f423e92dcfa0bddea9195");
         },
         url: GEN_WORDS_URL + "&words=" + encodeURIComponent(words),
         data: {}
       })
-        .done(function (results: GenWordsResponse) {
+        .done((results: GenWordsResponse) => {
           try {
             error("The most probable word that round was: <strong>" + results.candidates[0].word + "</strong>", Errors.INFO);
           } catch (e) {
             error("Looks like that was an uncommon phrase!", Errors.INFO);
           }
         })
-        .fail(function () {
+        .fail(() => {
           errorPanel.slideUp(500, null);
         });
 
       chooseNextPhrase();
     })
-    .fail(function () {
+    .fail(() => {
       error("Oops! Something went wrong; perhaps your word is too long? Please try again.");
     });
 }
@@ -182,7 +172,6 @@ function reset() {
   chooseNextPhrase();
 }
 
-
 // These functions do some Facebook stuff
 function initFBStuff() {
   FB.init({
@@ -193,16 +182,16 @@ function initFBStuff() {
 
   FB.getLoginStatus(statusChangeCallback);
 
-  fbLoginButton.on("click", function () {
+  fbLoginButton.on("click", () => {
     if (!loggedIn) {
-      FB.login(function (response: any) {
+      FB.login((response) => {
         if (response.authResponse) {
           fbLoginButton.html("<img src=\"FB-f-Logo__white_50.png\"> Log out");
           loggedIn = true;
         }
       }, { scope: "email,public_profile" });
     } else {
-      FB.logout(function () {
+      FB.logout(() => {
         fbLoginButton.html("<img src=\"FB-f-Logo__white_50.png\"> Log in using Facebook");
         loggedIn = false;
       });
@@ -216,7 +205,7 @@ function statusChangeCallback(response) {
       {
         fields: "first_name,last_name"
       },
-      function (response: any) {
+      (response) => {
         $("#name").html(response.first_name);
       }
     );
@@ -226,16 +215,15 @@ function statusChangeCallback(response) {
   fbLoginButton.removeClass("hide");
 }
 
-
 // Get click handlers and other things ready on page load
-$(document).ready(function () {
+$(document).ready(() => {
   errorPanel.hide();
   errorPanel.removeClass("hide");
 
   reset();
   submitButton.on("click", submitWords);
 
-  $("#fbShareButton").on("click", function () {
+  $("#fbShareButton").on("click", () => {
     FB.ui({
       method: "share",
       href: "https://nextword.azurewebsites.net/",
