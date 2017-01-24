@@ -10,9 +10,9 @@
       false,
       "never-prefix"
     ],
-    "trailing-comma": false,
+    "trailing-comma": [false],
     "object-literal-sort-keys": false,
     "no-shadowed-variable": false,
-    "no-consecutive-blank-lines": false
+    "no-consecutive-blank-lines": [false]
   }
 }

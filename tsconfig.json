@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
+    "module": "es6",
+    "target": "es6",
     "allowJs": true,
     "sourceMap": false,
     "allowSyntheticDefaultImports": true,
     "noLib": false,
-    "typeRoots": ["./typings"]
+    "typeRoots": ["./node_modules/@types"]
   },
   "exclude": [
     "public",

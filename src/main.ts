@@ -216,6 +216,11 @@ function statusChangeCallback(response) {
 }
 
 // Get click handlers and other things ready on page load
+$(() => {
+  $.ajaxSetup({ cache: true });
+  $.getScript('//connect.facebook.net/en_US/sdk.js', initFBStuff);
+});
+
 $(document).ready(() => {
   errorPanel.hide();
   errorPanel.removeClass("hide");

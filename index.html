@@ -29,18 +29,10 @@
     || (i = "onerror", r("_" + i), f = e[i], e[i] = function(config, r, u, e, o) { var s = f && f(config, r, u, e, o); return
     s !== !0 && t["_" + i](config, r, u, e, o), s }), t }({ instrumentationKey: "100eb9f8-b703-4afa-8767-491d68c52684" }); window.appInsights
     = appInsights; appInsights.trackPageView();</script>
-
-  <script type="text/javascript">
-    $(function () {
-      $.ajaxSetup({ cache: true });
-      $.getScript('//connect.facebook.net/en_US/sdk.js', initFBStuff);
-    });
-  </script>
 </head>
 
 <body>
-  <div class="container">
-
+  <main class="container">
     <div class="page-header">
       <h1 class="text-center"><span style="text-decoration: underline">N</span>extWord
       <br>
@@ -87,7 +79,6 @@
       </div>
     </div>
 
-
     <!-- Main input row -->
     <div class="row">
       <div class="col-sm-2"></div>
@@ -133,8 +124,7 @@
     </div>
 
     <div id="fbLoginButton" class="center-block btn btn-block hide"><img src="FB-f-Logo__white_50.png" style="width: 40px;"> Log in using Facebook</div>
-
-  </div>
+  </main>
 
   <footer class="foot">
     <div class="container">
